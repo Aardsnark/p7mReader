@@ -39,10 +39,10 @@ jobs:
         path: '**/TestResults/*.trx'
 
     - name: Build Docker image
-      run: docker build -t p7mReader:latest .
+      run: docker build -t p7mreader:latest .
 
     - name: Log into Docker Hub
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Push Docker image to Docker Hub
-      run: docker push p7mReader:latest 
+      run: docker push p7mreader:latest 
