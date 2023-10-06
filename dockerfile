@@ -11,13 +11,13 @@ WORKDIR /app
     #&& rm dotnet-framework-4.8-developer-pack-offline-installer.exe
 
 # Copy the .NET Framework Developer Pack installer into the container
-COPY ndp48-devpack-enu.exe ./
+COPY /ndp48-devpack-enu.exe ./
 
 # Install .NET Framework Developer Pack for version 4.8
 RUN ./ndp48-devpack-enu.exe /q
 
 # Clean up the installer
-RUN rm ndp48-devpack-enu.exe
+RUN rm /ndp48-devpack-enu.exe
 
 
 # Copy and restore dependencies for ConsoleAppNetFramework
