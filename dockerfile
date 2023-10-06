@@ -10,22 +10,22 @@ WORKDIR /app
     #&& apt-get clean && rm -rf /var/lib/apt/lists/* \
     #&& rm dotnet-framework-4.8-developer-pack-offline-installer.exe
 
-# Copy the .NET Framework Developer Pack installer into the container
-COPY /ndp48-devpack-enu.exe ./
-
-# Install .NET Framework Developer Pack for version 4.8
-RUN ./ndp48-devpack-enu.exe /q
-
-# Clean up the installer
-RUN rm /ndp48-devpack-enu.exe
+## Copy the .NET Framework Developer Pack installer into the container
+#COPY /ndp48-devpack-enu.exe ./
+#
+## Install .NET Framework Developer Pack for version 4.8
+#RUN ./ndp48-devpack-enu.exe /q
+#
+## Clean up the installer
+#RUN rm /ndp48-devpack-enu.exe
 
 
 # Copy and restore dependencies for ConsoleAppNetFramework
-COPY src/ConsoleAppNetFramework/ConsoleAppNetFramework.csproj ./ConsoleAppNetFramework/
-RUN dotnet restore ./ConsoleAppNetFramework/ConsoleAppNetFramework.csproj
-
-# Copy the application source code for ConsoleAppNetFramework
-COPY src/ConsoleAppNetFramework ./ConsoleAppNetFramework/
+#COPY src/ConsoleAppNetFramework/ConsoleAppNetFramework.csproj ./ConsoleAppNetFramework/
+#RUN dotnet restore ./ConsoleAppNetFramework/ConsoleAppNetFramework.csproj
+#
+## Copy the application source code for ConsoleAppNetFramework
+#COPY src/ConsoleAppNetFramework ./ConsoleAppNetFramework/
 
 # Copy and restore dependencies for ConsoleApp1
 COPY src/ConsoleApp1/ConsoleApp1.csproj ./ConsoleApp1/
@@ -49,7 +49,7 @@ RUN dotnet restore ./Net6.UnitTests/Net6.UnitTests.csproj
 COPY test/Net6.UnitTests ./Net6.UnitTests/
 
 # Build each project
-RUN dotnet publish -c Release -o out/ConsoleAppNetFramework ./ConsoleAppNetFramework
+#RUN dotnet publish -c Release -o out/ConsoleAppNetFramework ./ConsoleAppNetFramework
 RUN dotnet publish -c Release -o out/ConsoleApp1 ./ConsoleApp1
 RUN dotnet publish -c Release -o out/ClassLibraryNetStandard2 ./ClassLibraryNetStandard2
 RUN dotnet publish -c Release -o out/Net6.UnitTests ./Net6.UnitTests
@@ -59,10 +59,10 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 WORKDIR /app
 
 # Copy the published output of each project into their respective folders in the final image
-COPY --from=build /app/out/ConsoleAppNetFramework ./src/ConsoleAppNetFramework/
+#COPY --from=build /app/out/ConsoleAppNetFramework ./src/ConsoleAppNetFramework/
 COPY --from=build /app/out/ConsoleApp1 ./src/ConsoleApp1/
 COPY --from=build /app/out/ClassLibraryNetStandard2 ./src/ClassLibraryNetStandard2/
 COPY --from=build /app/out/Net6.UnitTests ./test/Net6.UnitTests/
 
 # Set the entry point for your application (adjust as needed)
-ENTRYPOINT ["dotnet", "src/ConsoleAppNetFramework/ConsoleAppNetFramework.dll"]
+ENTRYPOINT ["dotnet", "src/ConsoleApp1/ConsoleApp1.dll"]
