@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj" />
     <ProjectReference Include="..\ClassLibraryNetStandard2\ClassLibraryNetStandard2.csproj" />
   </ItemGroup>
 

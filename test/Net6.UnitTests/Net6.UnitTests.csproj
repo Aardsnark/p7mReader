@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibraryNetStandard2\ClassLibraryNetStandard2.csproj" />
+    <ProjectReference Include="..\..\src\ClassLibraryNetStandard2\ClassLibraryNetStandard2.csproj" />
   </ItemGroup>
 
 </Project>
