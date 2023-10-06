@@ -16,8 +16,7 @@ class Program
 
 		foreach (string p7mFile in p7mFiles)
 		{
-			//P7mExtractorNetStandard.ExtractAndSaveContent(p7mFile, outputFolder);
-			P7mExtractorNetFramework.ExtractAndSaveContent(p7mFile, outputFolder);
+			P7mExtractorNetStandard.ExtractAndSaveContent(p7mFile, outputFolder);
 		}
 	}
 }
