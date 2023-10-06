@@ -33,7 +33,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=testresults.trx"
         
     - name: Publish Test Results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: test-results
         path: '**/TestResults/*.trx'
