@@ -13,7 +13,7 @@ jobs:
 
     defaults:
       run:
-       working-directory: ./tests/Net6.UnitTests/
+       working-directory: ./test/Net6.UnitTests/
 
     steps:
     - uses: actions/checkout@v3
