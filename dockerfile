@@ -45,10 +45,6 @@ COPY src/ClassLibraryNetStandard2 ./ClassLibraryNetStandard2/
 COPY test/Net6.UnitTests/Net6.UnitTests.csproj ./Net6.UnitTests/
 RUN dotnet restore ./Net6.UnitTests/Net6.UnitTests.csproj
 
-# Clean and build the project
-RUN dotnet clean
-RUN dotnet build
-
 # Copy the test project source code for Net6.UnitTests
 COPY test/Net6.UnitTests ./Net6.UnitTests/
 
