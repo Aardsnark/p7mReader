@@ -39,6 +39,7 @@ jobs:
         path: '**/TestResults/*.trx'
 
     - name: Build Docker image
+      working-directory: ${{ github.workspace }}  # Set the working directory to the root of the repository
       run: docker build -t p7mreader:latest .
 
     - name: Log into Docker Hub
