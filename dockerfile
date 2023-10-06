@@ -2,13 +2,22 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
+## Install .NET Framework Developer Pack for version 4.8
+#RUN apt-get update && apt-get install -y \
+    #wine \
+    #&& wget https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer \
+    #&& wine dotnet-framework-4.8-developer-pack-offline-installer.exe /q \
+    #&& apt-get clean && rm -rf /var/lib/apt/lists/* \
+    #&& rm dotnet-framework-4.8-developer-pack-offline-installer.exe
+
+# Copy the .NET Framework Developer Pack installer into the container
+COPY ndp48-devpack-enu.exe ./
+
 # Install .NET Framework Developer Pack for version 4.8
-RUN apt-get update && apt-get install -y \
-    wine \
-    && wget https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer \
-    && wine dotnet-framework-4.8-developer-pack-offline-installer.exe /q \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* \
-    && rm dotnet-framework-4.8-developer-pack-offline-installer.exe
+RUN ./ndp48-devpack-enu.exe /q
+
+# Clean up the installer
+RUN rm ndp48-devpack-enu.exe
 
 
 # Copy and restore dependencies for ConsoleAppNetFramework
