@@ -52,7 +52,7 @@ COPY test/Net6.UnitTests ./test/Net6.UnitTests/
 #RUN dotnet publish -c Release -o out/ConsoleAppNetFramework ./ConsoleAppNetFramework
 RUN dotnet publish -c Release -o out/ClassLibraryNetStandard2 ./src/ClassLibraryNetStandard2
 RUN dotnet publish -c Release -o out/ConsoleApp1 ./src/ConsoleApp1
-RUN dotnet publish -c Release -o out/Net6.UnitTests ./src/Net6.UnitTests
+RUN dotnet publish -c Release -o out/Net6.UnitTests ./test/Net6.UnitTests
 
 # Use a smaller runtime image for the final image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
