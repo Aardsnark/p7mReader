@@ -28,31 +28,31 @@ WORKDIR /app
 #COPY src/ConsoleAppNetFramework ./ConsoleAppNetFramework/
 
 # Copy and restore dependencies for ClassLibraryNetStandard2
-COPY src/ClassLibraryNetStandard2/ClassLibraryNetStandard2.csproj ./ClassLibraryNetStandard2/
-RUN dotnet restore ./ClassLibraryNetStandard2/ClassLibraryNetStandard2.csproj
+COPY src/ClassLibraryNetStandard2/ClassLibraryNetStandard2.csproj ./src/ClassLibraryNetStandard2/
+RUN dotnet restore ./src/ClassLibraryNetStandard2/ClassLibraryNetStandard2.csproj
 
 # Copy the application source code for ClassLibraryNetStandard2
-COPY src/ClassLibraryNetStandard2 ./ClassLibraryNetStandard2/
+COPY src/ClassLibraryNetStandard2 ./src/ClassLibraryNetStandard2/
 
 # Copy and restore dependencies for ConsoleApp1
-COPY src/ConsoleApp1/ConsoleApp1.csproj ./ConsoleApp1/
-RUN dotnet restore ./ConsoleApp1/ConsoleApp1.csproj
+COPY src/ConsoleApp1/ConsoleApp1.csproj ./src/ConsoleApp1/
+RUN dotnet restore ./src/ConsoleApp1/ConsoleApp1.csproj
 
 # Copy the application source code for ConsoleApp1
-COPY src/ConsoleApp1 ./ConsoleApp1/
+COPY src/ConsoleApp1 ./src/ConsoleApp1/
 
 # Copy and restore dependencies for Net6.UnitTests
-COPY test/Net6.UnitTests/Net6.UnitTests.csproj ./Net6.UnitTests/
-RUN dotnet restore ./Net6.UnitTests/Net6.UnitTests.csproj
+COPY test/Net6.UnitTests/Net6.UnitTests.csproj ./test/Net6.UnitTests/
+RUN dotnet restore ./test/Net6.UnitTests/Net6.UnitTests.csproj
 
 # Copy the test project source code for Net6.UnitTests
-COPY test/Net6.UnitTests ./Net6.UnitTests/
+COPY test/Net6.UnitTests ./test/Net6.UnitTests/
 
 # Build each project
 #RUN dotnet publish -c Release -o out/ConsoleAppNetFramework ./ConsoleAppNetFramework
-RUN dotnet publish -c Release -o out/ClassLibraryNetStandard2 ./ClassLibraryNetStandard2
-RUN dotnet publish -c Release -o out/ConsoleApp1 ./ConsoleApp1
-RUN dotnet publish -c Release -o out/Net6.UnitTests ./Net6.UnitTests
+RUN dotnet publish -c Release -o out/ClassLibraryNetStandard2 ./src/ClassLibraryNetStandard2
+RUN dotnet publish -c Release -o out/ConsoleApp1 ./src/ConsoleApp1
+RUN dotnet publish -c Release -o out/Net6.UnitTests ./src/Net6.UnitTests
 
 # Use a smaller runtime image for the final image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
