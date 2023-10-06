@@ -2,6 +2,15 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
+# Install .NET Framework Developer Pack for version 4.8
+RUN apt-get update && apt-get install -y \
+    wine \
+    && wget https://download.visualstudio.microsoft.com/download/pr/11624361/e64d79b40219aea618ce2fe10ebd5f9f/dotnet-framework-4.8-developer-pack-offline-installer.exe \
+    && wine dotnet-framework-4.8-developer-pack-offline-installer.exe /q \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* \
+    && rm dotnet-framework-4.8-developer-pack-offline-installer.exe
+
+
 # Copy and restore dependencies for ConsoleAppNetFramework
 COPY src/ConsoleAppNetFramework/ConsoleAppNetFramework.csproj ./ConsoleAppNetFramework/
 RUN dotnet restore ./ConsoleAppNetFramework/ConsoleAppNetFramework.csproj
